@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-header('location: servicios_pobres.php');
+if (isset($_SESSION['user'])) {
+header('location: servicios.php');
 exit();
 }
 ?>
@@ -44,7 +44,6 @@ exit();
 					<a href="index_chidos.php" class="brand-logo" style="position: relative; margin-left: 75px">Banco Profilia</a>
 					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-						<li><a href="cuenta.php">Mi Cuenta</a></li>
 						<li><a href="historia.php">Historia</a></li>
 						<li class="active"><a href="servicios.php">Servicios</a></li>
 						<li><a href="clientes.php">Clientes</a></li>
@@ -52,7 +51,6 @@ exit();
 						<li><a href="about.php">About Us</a></li>
 					</ul>
 					<ul class="side-nav" id="mobile-demo">
-						<li><a href="cuenta.php">Mi Cuenta</a></li>
 			      <li><a href="historia.php">Historia</a></li>
 			      <li class="active"><a href="servicios.php">Servicios</a></li>
 			      <li><a href="clientes.php">Clientes</a></li>
@@ -61,6 +59,26 @@ exit();
 					</ul>
 				</div>
 			</nav>
+		</div>
+		<!--Suscribete-->
+<div class="row">
+			<div class="col s12 offset-l4 m4" off>
+				<div class="card black darken-l">
+					<div class="card-content white-text" style="text-align: center">
+						<span class="card-title" >¿Ya eres miembro?</span>
+						<form action="login.php" method="POST" style="text-align: center">
+							<input type="text" name="user" placeholder="Nickname">
+							<input type="password" name="password" placeholder="Contraseña">
+							<input type="submit" class="waves-effect waves-light btn"  value="Iniciar sesión">
+						</form>
+						<br>
+						<form>
+							<span class="card-title" >¿Aún no lo eres?</span><br>
+							<a class="waves-effect waves-light btn">¡Hazte miembro!</a><br><br>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 <!--Servicios-->
 	<!--Servicio1-->

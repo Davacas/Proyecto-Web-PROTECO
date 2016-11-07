@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if ( isset($_SESSION['user'])) {
-		header('location: ./index_chidos.php');
+		header('location: historia.php');
 		exit();
 	}
 ?>
@@ -16,16 +16,6 @@
 		<title>BANCO PROFILIA</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
-		<style>
-		html, body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		}
-		div#content {
-		width: 100%; height: 100%;
-		}
-		</style>
 	</head>
 	<body bgcolor="#4F4F4F">
 		<!--Scripts para inicializar-->
@@ -36,47 +26,42 @@
 			$(".button-collapse").sideNav();
 			});
 		</script>
-		<script>
-		function initMap() {
-				var myLatLng = {lat: 24.1216396, lng: -110.2980366};
-				var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 4,
-				center: myLatLng
-				});
-				var marker = new google.maps.Marker({
-				position: myLatLng,
-				map: map,
-				title: 'Banco Profilia'
-				});
-				}
-		</script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEbpzxlhY0fTv_cJmIOYNMXkgC20qHZ9A&signed_in=true&callback=initMap"></script>
+		<style type="text/css">
+		li.active a{
+			background-color: #aaa;
+			font-weight: bold;
+			color: black;
+		}
+		li:hover a{
+			color: #999;
+		}
+		</style>
 <!--Navbar-->
 		<div class="navbar-fixed" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif">
 			<nav>
 				<div class="nav-wrapper black white-text">
-					<a href="index.php" class="brand-logo"><img src="img/logo_icon.png" style="height: 64%; width: 64%"></a>
-					<a href="index.php" class="brand-logo" style="position: relative; margin-left: 75px">Banco Profilia</a>
+					<a href="index_chidos.php" class="brand-logo"><img src="img/logo_icon.png" style="height: 64%; width: 64%"></a>
+					<a href="index_chidos.php" class="brand-logo" style="position: relative; margin-left: 75px">Banco Profilia</a>
 					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-						<li><a href="historia_pobres.php">Historia</a></li>
-						<li><a href="servicios_pobres.php">Servicios</a></li>
-						<li><a href="clientes_pobres.php">Clientes</a></li>
-						<li><a href="comentarios_pobres.php">Comentarios</a></li>
-						<li><a href="about_pobres.php">About Us</a></li>
+						<li class="active"><a href="historia.php">Historia</a></li>
+						<li><a href="servicios.php">Servicios</a></li>
+						<li><a href="clientes.php">Clientes</a></li>
+						<li><a href="comentarios.php">Comentarios</a></li>
+						<li><a href="about.php">About Us</a></li>
 					</ul>
 					<ul class="side-nav" id="mobile-demo">
-						<li><a href="historia_pobres.php">Historia</a></li>
-						<li><a href="servicios_pobres.php">Servicios</a></li>
-						<li><a href="clientes_pobres.php">Clientes</a></li>
-						<li><a href="comentarios_pobres.php">Comentarios</a></li>
-						<li><a href="about_pobres.php">About Us</a></li>
+            <li class="active"><a href="historia.php">Historia</a></li>
+            <li><a href="servicios.php">Servicios</a></li>
+            <li><a href="clientes.php">Clientes</a></li>
+            <li><a href="comentarios.php">Comentarios</a></li>
+            <li><a href="about.php">About Us</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
 <!--Suscribete-->
-<div class="row">
+		<div class="row">
 			<div class="col s12 offset-l4 m4" off>
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="text-align: center">
@@ -96,28 +81,20 @@
 			</div>
 		</div>
 <!--Texto-->
-<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 16pt; color: #EFEFEF">
-	<div class="col s3">
-		<img src="img/logo.png" style="height: 100%; width: 100%">
-	</div>
-	<div class="col s9">
-		<h2 style="color: #AFAFAF">Por qué unirse a Banco Profilia</h2>
-		<p>Banco Profilia es una empresa 100% mexicana respaldada con más de 3 semanas de experiencia en los servicios bancarios y más de un cliente satisfecho.</p>
-		<p>Ofrecemos un excelente servicio y las mejores tarifas bancarias de México.</p>
-		<p">¡Explora este sitio para aprender más sobre nosotros!, o bien:</p>
-	</div>
-</div>
-<!--VISÍTANOS-->
-	<h3 style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; text-align: center; color: #AFAFAF;">¡Visítanos!</h3>
-		<div class="row" style="font-family: Arial,Helvetica Neue,Helvetica,sans-serif; font-size: 15pt; color: white">
-			<div class="col s5 offset-l1" ><p>Estamos aquí:</p>
-				<div id="map" style="height: 395px"></div>
+		<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
+			<div class="offset-l1 col s7">
+				<p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit unde in, vel laudantium rem animi sequi id nesciunt natus beatae voluptatem quasi hic, voluptatibus magni quas. Laborum ad, sequi, hic voluptate cumque ratione accusantium, pariatur ducimus nulla dignissimos recusandae sapiente iure labore nesciunt ipsa, quisquam saepe officia magni. Officiis fugiat vero accusantium quasi, odio neque consectetur reiciendis saepe autem ad, odit recusandae, rem quisquam fugit. Dolor dolorem praesentium quia ea veritatis quod a fugit, esse, odio, quam repellat sapiente possimus qui non nulla laborum. Dignissimos facilis deleniti perferendis, minus neque voluptatibus dolore eveniet aut assumenda obcaecati quidem distinctio aspernatur incidunt nisi totam quaerat dolor vitae reiciendis odio eum. Nostrum aspernatur quos quae, nobis voluptatem. </p>
 			</div>
-			<div class="col s5"> <p>Busca este edificio:</p>
+			<div class="col s3">
+				<br><br>
 				<img src="img/banco.jpg" style="height: 100%; width: 100%">
 			</div>
 		</div>
-<p style="text-align: center; color: white"><b>Dirección: </b>Lateral los Planes #175 entre Bugambilias y Maravillas, C.P. 23055, colonia Jardines del Sur, La Paz, Baja California Sur, México.</p>
+		<div class="row">
+			<div class="offset-l1 col s10">
+				<p style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF; text-align: justify;">delectus quasi quam, optio quis laboriosam accusantium possimus magni iste earum repellendus. Quae, ad maiores incidunt, exercitationem ullam ratione, ab repellat blanditiis impedit nihil laboriosam hic dolor placeat, doloribus voluptates. Quae iure cum voluptatum placeat dolor nostrum expedita delectus necessitatibus explicabo distinctio modi eveniet eligendi saepe ullam nisi, natus veritatis optio perspiciatis hic sapiente debitis, nam? Libero sit dicta, delectus omnis! Repellat a quidem, dolorem nostrum quas. Eum, cupiditate. Alias dignissimos quae, eum non laudantium ipsam in vel laboriosam placeat dolor, repellendus est vitae beatae sequi.</p>
+			</div>
+		</div>
 <!--Footer-->
 <footer class="page-footer black" style="font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
 <div class="container">

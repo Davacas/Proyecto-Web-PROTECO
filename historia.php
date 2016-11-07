@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+header('location: historia_pobres.html');
+exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

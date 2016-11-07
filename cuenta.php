@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-header('location: about_pobres.php');
+header('location: ./index.php');
 exit();
 }
 ?>
@@ -46,45 +46,45 @@ exit();
 					<a href="index_chidos.php" class="brand-logo" style="position: relative; margin-left: 75px">Banco Profilia</a>
 					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-						<li><a href="cuenta.php">Mi Cuenta</a></li>
+						<li class="active"><a href="cuenta.php">Mi Cuenta</a></li>
 						<li><a href="historia.php">Historia</a></li>
 						<li><a href="servicios.php">Servicios</a></li>
 						<li><a href="clientes.php">Clientes</a></li>
 						<li><a href="comentarios.php">Comentarios</a></li>
-						<li class="active"><a href="about.php">About Us</a></li>
+						<li><a href="about.php">About Us</a></li>
 					</ul>
 					<ul class="side-nav" id="mobile-demo">
-						<li><a href="cuenta.php">Mi Cuenta</a></li>
+						<li class="active"><a href="cuenta.php">Mi Cuenta</a></li>
 					      <li><a href="historia.php">Historia</a></li>
 					      <li><a href="servicios.php">Servicios</a></li>
 					      <li><a href="clientes.php">Clientes</a></li>
 					      <li><a href="comentarios.php">Comentarios</a></li>
-					      <li class="active"><a href="about.php">About Us</a></li>
+					      <li><a href="about.php">About Us</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
-<!--Servicios-->
-<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF; text-align: justify;">
-	<div class="offset-l1 col s10">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel maiores eum molestiae repudiandae deleniti, velit vitae quo illo consequuntur quidem suscipit enim architecto exercitationem molestias voluptas quibusdam, saepe quas. Ducimus ratione esse, deleniti dolor, nihil commodi. Tempora distinctio modi repellat aperiam dolorum impedit at fuga error, eligendi id, ab quae tempore debitis nemo facilis, repudiandae unde quam officia magni! Eaque ab dolore assumenda, sapiente, nostrum fuga ullam earum vitae quibusdam similique tenetur omnis libero ipsum. Culpa iste officia nesciunt, aliquid, laborum facilis, itaque quae excepturi veniam non odio provident reiciendis inventore, laboriosam illo tempore magnam sint consectetur qui? Nulla, repellat!</p>
-	</div>
-	</div>	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.parallax').parallax();
-		});
-	</script>
-	<div class="parallax-container">
-				<div class="parallax">
-					<img src="img/prebes.jpg">
+		<div class="row">
+			<div class="col s12 offset-l1 m5" off>
+				<div class="card black darken-l">
+					<div class="card-content white-text" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 16pt; color: #EFEFEF">
+					<span class="card-title" style="font-size: 20pt; font-weight: bold">Datos de su cuenta:</span>
+					<br>
+						<p><b>Usuario: </b><?php echo $_SESSION['user'];?></p><br>
+						<p><b>Nombre: </b><?php echo $_SESSION['nombre'];?></p><br>
+						<p><b>Correo: </b><?php echo $_SESSION['correo'];?></p><br>
+						<p><b>Teléfono: </b><?php echo $_SESSION['telefono'];?></p>
+					</div>
 				</div>
 			</div>
-			<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF; text-align: justify;">
-	<div class="offset-l1 col s10">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel maiores eum molestiae repudiandae deleniti, velit vitae quo illo consequuntur quidem suscipit enim architecto exercitationem molestias voluptas quibusdam, saepe quas. Ducimus ratione esse, deleniti dolor, nihil commodi. Tempora distinctio modi repellat aperiam dolorum impedit at fuga error, eligendi id, ab quae tempore debitis nemo facilis, repudiandae unde quam officia magni! Eaque ab dolore assumenda, sapiente, nostrum fuga ullam earum vitae quibusdam similique tenetur omnis libero ipsum. Culpa iste officia nesciunt, aliquid, laborum facilis, itaque quae excepturi veniam non odio provident reiciendis inventore, laboriosam illo tempore magnam sint consectetur qui? Nulla, repellat!</p>
-	</div>
-	</div>	
+			<div class="col s12 m5" off style="text-align: center; color: white">
+				<h4>¿Deseas realizar alguna modificación en tu cuenta?</h4>
+				<a class="waves-effect waves-light btn" style="width: 100%">Actualizar mis datos</a><br><br>
+				<a class="waves-effect waves-light btn" style="width: 100%">Depositar a otro usuario</a><br><br>
+				<a class="waves-effect waves-light btn" href="logoff.php" style="width: 100%">Cerrar sesión</a><br><br><br>
+				<a class="waves-effect waves-light btn red">Eliminar mi cuenta</a><br><br>
+			</div>
+		</div>
 <!--Footer-->
 <footer class="page-footer black" style="font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
 <div class="container">

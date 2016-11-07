@@ -11,7 +11,7 @@
 		header('location: index_chidos.php');
 	}
 	else {
-		header('location:./error.html');
+		header('location:./index.php');
 	}
 	exit();
 ?>

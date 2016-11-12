@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['nickname'])) {
 header('location: clientes_pobres.php');
 exit();
 }
@@ -66,17 +66,20 @@ exit();
 	<!--Servicio1-->
 <div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
 	<div class="offset-l1 col s3">
-	<br>
-		<ul class="collection with-header black darken-l">
-        <li class="collection-header black"><h5><b>Miembros Activos:</b></h5></li>
-        <li class="collection-item black">Elver</li>
-        <li class="collection-item black">Monnie</li>
-        <li class="collection-item black">Galarga</li>
-        <li class="collection-item black">Davacas</li>
-        <li class="collection-item black">Satanás</li>
-      </ul>
-      <h6>Saldo total del banco:</h6>
-      <p style="color: red">$-112358.13 MXN</p>
+	<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
+  <br>
+    <ul class="collection with-header black z-depth-1">
+              <li class="collection-header black lighten-3"> <h5><b>Miembros activos:</b></h5></li>
+              <?php
+                include 'db.php';
+                $pdo = Database::connect();
+                $sql = 'SELECT nickname FROM Usuarios';
+                foreach ($pdo->query($sql) as $row) {
+                  echo '<li class="collection-item grey">'.$row['nickname'].'</li>';
+                }
+              ?>
+           </ul>
+  </div>
 	</div>
 	<div class="col s7">
 		<h3><b>¡Muchas gracias!</b></h3>

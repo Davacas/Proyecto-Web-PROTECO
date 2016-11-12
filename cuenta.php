@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['nickname'])) {
 header('location: ./index.php');
 exit();
 }
@@ -15,8 +15,6 @@ exit();
 		<link rel="icon" type="image/gif" href="img/logo.gif"/>
 		<title>BANCO PROFILIA</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-		<meta charset="utf-8">
-		<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</head>
 	<body bgcolor="#4F4F4F">
 		<!--Scripts para inicializar-->
@@ -65,24 +63,78 @@ exit();
 			</nav>
 		</div>
 		<div class="row">
-			<div class="col s12 offset-l1 m5" off>
+			<div class="col s12 offset-l1 m4" off>
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 16pt; color: #EFEFEF">
-					<span class="card-title" style="font-size: 20pt; font-weight: bold">Datos de su cuenta:</span>
-					<br>
-						<p><b>Usuario: </b><?php echo $_SESSION['user'];?></p><br>
-						<p><b>Nombre: </b><?php echo $_SESSION['nombre'];?></p><br>
-						<p><b>Correo: </b><?php echo $_SESSION['correo'];?></p><br>
-						<p><b>Teléfono: </b><?php echo $_SESSION['telefono'];?></p>
+						<span class="card-title" style="font-size: 20pt; font-weight: bold">Datos del usuario:</span>
+						<br>
+						<p><b>Usuario:	</b><?php echo $_SESSION['nickname'];?></p><br>
+						<p><b>Nombre:		</b><?php echo $_SESSION['nombre'];?></p><br>
+						<p><b>Correo:		</b><?php echo $_SESSION['email'];?></p><br>
+						<p><b>Saldo Total: </b><?php
+							include 'db.php';
+							$saldo_total = 0;
+							$pdo = Database::connect();
+							$sql = 'SELECT saldo FROM Cuentas WHERE usuario=\''.$_SESSION['nickname'].'\'';
+							foreach ($pdo->query($sql) as $row) {
+							$saldo_total += $row['saldo'];
+							}
+							Database::disconnect();
+							echo '$'.$saldo_total;
+							?>
+						</p>
 					</div>
 				</div>
+				<a href="logoff.php" class="btn waves-effect waves-light col s8 offset-l2">Cerrar sesión</a>
 			</div>
-			<div class="col s12 m5" off style="text-align: center; color: white">
-				<h4>¿Deseas realizar alguna modificación en tu cuenta?</h4>
-				<a class="waves-effect waves-light btn" style="width: 100%">Actualizar mis datos</a><br><br>
-				<a class="waves-effect waves-light btn" style="width: 100%">Depositar a otro usuario</a><br><br>
-				<a class="waves-effect waves-light btn" href="logoff.php" style="width: 100%">Cerrar sesión</a><br><br><br>
-				<a class="waves-effect waves-light btn red">Eliminar mi cuenta</a><br><br>
+
+			<div class="col s12 m6" off style="text-align: center; color: white">
+			<br>
+				<h4>Cuentas disponibles:</h4>
+				<table>
+
+                    <thead>
+                      <tr>
+                        <th>Número de cuenta</th>
+                        <th>Saldo Actual*</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                        $i = 0;
+                        $pdo = Database::connect();
+                        $sql = 'SELECT * FROM Cuentas WHERE usuario=\''.$_SESSION['nickname'].'\'';
+                        foreach ($pdo->query($sql) as $row) {
+                      ?>
+                      <tr>
+                        <td>
+                        <?php
+                          echo $row['id_cuenta'];
+                        ?>
+                        </td>
+                        <td>
+                        <?php
+                          echo '$'.$row['saldo'];
+                        ?>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <a href="transfer-form.php?no_cuenta=<?php echo $row['id_cuenta']?>" class="waves-effect waves-light btn btn-table blue lighten-2 modal-trigger col s9">Transferir</a>
+                          </div>
+                          <div class="row">
+                            <a href="delete-confirm.php?no_cuenta=<?php echo $row['id_cuenta']?>" class="waves-effect waves-light btn btn-table deep-orange lighten-1 modal-trigger col s9">Eliminar</a>
+                          </div>
+                        </td>
+                        <?php
+                          }
+                          Database::disconnect();
+                        ?>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a href="create-account.php" class="waves-effect waves-light btn btn-table col s12">Crear una nueva cuenta</a><br>
+                  <p style="font-size: 11px">*Para hacer un depósito o retiro en efectivo de su cuenta, por favor acuda a una de nuestras sucursales.</p>
 			</div>
 		</div>
 <!--Footer-->

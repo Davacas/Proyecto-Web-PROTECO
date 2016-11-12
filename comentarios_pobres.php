@@ -1,8 +1,12 @@
 <?php
 	session_start();
-	if ( isset($_SESSION['user'])) {
+	if ( isset($_SESSION['nickname'])) {
 		header('location: ./comentarios.php');
 		exit();
+	}
+	else
+	{
+		require 'db.php';
 	}
 ?>
 <!DOCTYPE html>
@@ -62,46 +66,58 @@
 				</div>
 			</nav>
 		</div>
-		<!--Suscribete-->
+<!--Suscribete-->
 <div class="row">
 			<div class="col s12 offset-l4 m4" off>
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="text-align: center">
 						<span class="card-title" >¿Ya eres miembro?</span>
-						<form action="login.php" method="POST" style="text-align: center">
-							<input type="text" name="user" placeholder="Nickname">
-							<input type="password" name="password" placeholder="Contraseña">
-							<input type="submit" class="waves-effect waves-light btn"  value="Iniciar sesión">
+						<form action="login.php" method="POST">
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="nickname" type="text" class="validate" name="nickname">
+                  <label for="nickname">Nickname</label>
+                </div>
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="password" type="password" class="validate" name="password">
+                  <label for="password">Contraseña</label>
+                </div>
+							<button class="btn waves-effect waves-light" type="submit" name="action">Iniciar sesión</button>
 						</form>
 						<br>
 						<form>
 							<span class="card-title" >¿Aún no lo eres?</span><br>
-							<a class="waves-effect waves-light btn">¡Hazte miembro!</a><br><br>
+							<a class="waves-effect waves-light btn" href="register.php">¡Hazte miembro!</a><br><br>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-<!--Servicios-->
-	<!--Servicio1-->
+	<!--Comenrarios-->
 <div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
-	<div class="offset-l1 col s5">
+	<div class="offset-l1 col s6">
 	<br>
-		<ul class="collection with-header black darken-l">
-        <li class="collection-header black"><h5><b>Comentarios de nuestros clientes:</b></h5></li>
-        <li class="collection-item black"><h5>Monnie dice:</h5><p>Estafa total. Lo único que sirve de este banco es su sitio web.</p>
-        </li>
-        <li class="collection-item black"><h5>Davacas dice:</h5><p>Hubiera sido mejor usar mi dinero para prender una fogata.</p>
-        </li>
-        <li class="collection-item black"><h5>Satanás dice:</h5><p>Olvídenlo. Está de la verga.</p>
-        </li>
-        <li class="collection-item black"><h5>Elver dice:</h5><p>Podría ser peor, podría estar muerto.</p>
-        </li>
-        <li class="collection-item black"><h5>Satanás dice:</h5><p>¡Excelente servicio! Soy miembro desde hace 6 horas y todo va de maravilla.</p>
-        </li>
-      </ul>
+		 <ul class="collection with-header">
+    <li class="collection-header black darken-1 white-text "><h5>Comentarios de nuestros clientes:</h5></li>
+    <?php
+
+      $pdo = Database::connect();
+      $sql = 'SELECT * FROM Comentarios';
+      foreach ($pdo->query($sql) as $row) {
+    ?>
+    <li class="collection-item grey">
+      <?php
+        echo '<span style="font-weight: bold">'.$row['nombre'].'</b> comentó:</span>'.'<br>';
+        echo '<span class="mensaje flow-text" style="font-size: 12pt">'.$row['mensaje'].'</span><br>';
+        echo '<span class="black-text comment-date" style="position: relative; margin-left: 70%; font-size: 10pt">'.$row['fecha'].'</span><br>';
+      ?>
+    </li>
+    <?php
+        }
+        Database::disconnect();
+      ?>
+  </ul>
 	</div>
-	<div class="col s5">
+	<div class="col s4">
 		<br>
 		<h5><b>Actividad reciente en Twitter:</b></h5>
 		<a class="twitter-timeline" href="https://twitter.com/BancoProfilia">Tweets by BancoProfilia</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

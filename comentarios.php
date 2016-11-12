@@ -1,9 +1,37 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-header('location: comentarios_pobres.php');
-exit();
-}
+	session_start();
+		if (!isset($_SESSION['nickname'])) {
+			header('location: comentarios_pobres.php');
+			exit();
+		}
+		else{
+			  require 'db.php';
+
+    if ( !empty($_POST)) {
+    $mensajeError = null;
+
+    $mensaje = $_POST['mensaje'];
+     
+    $valid = true;
+
+    if (empty($mensaje)) {
+      $mensajeError = 'Insertar un mensaje';
+      $valid = false;
+    }
+     
+    if ($valid) {
+      
+      $pdo = Database::connect();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = "INSERT INTO Comentarios (nombre,email,mensaje) values(?,?,?)";
+      $q = $pdo->prepare($sql);
+      $q->execute(array($_SESSION['nickname'],$_SESSION['email'],$mensaje));
+      Database::disconnect();
+      header('location: ./comentarios.php');
+      exit();
+    }
+  }
+		}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,26 +92,44 @@ exit();
 				</div>
 			</nav>
 		</div>
-<!--Servicios-->
-	<!--Servicio1-->
+<!--Hacer comentario-->
 <div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
-	<div class="offset-l1 col s5">
-	<br>
-		<ul class="collection with-header black darken-l">
-        <li class="collection-header black"><h5><b>Comentarios de nuestros clientes:</b></h5></li>
-        <li class="collection-item black"><h5>Monnie dice:</h5><p>Estafa total. Lo único que sirve de este banco es su sitio web.</p>
-        </li>
-        <li class="collection-item black"><h5>Davacas dice:</h5><p>Hubiera sido mejor usar mi dinero para prender una fogata.</p>
-        </li>
-        <li class="collection-item black"><h5>Satanás dice:</h5><p>Olvídenlo. Está de la verga.</p>
-        </li>
-        <li class="collection-item black"><h5>Elver dice:</h5><p>Podría ser peor, podría estar muerto.</p>
-        </li>
-        <li class="collection-item black"><h5>Satanás dice:</h5><p>¡Excelente servicio! Soy miembro desde hace 6 horas y todo va de maravilla.</p>
-        </li>
-      </ul>
-	</div>
-	<div class="col s5">
+		<div class="offset-l1 col s6">
+			<br>
+			<div class="input-field col l12">
+				<form method="POST" action="comentarios.php">
+					<textarea id="mensaje" class="materialize-textarea" name="mensaje"<?php if(!empty($_POST['mensaje'])) { echo ' value="'.$_POST['mensaje'].'"'; } ?>></textarea>
+					<label for="mensaje">Escribe tu comentario:</label>
+					<?php if (!empty($mensajeError)) { echo '<span class="red-text bold-text">'.$mensajeError.'</span>'; } ?>
+				</div>
+				<div class="row center">
+					<button class="btn waves-effect waves-light" type="submit" name="action">Comentar</button>
+				</div>
+			</form>
+<!--Comentarios-->
+ <ul class="collection with-header">
+    <li class="collection-header black darken-1 white-text "><h5>Comentarios de nuestros clientes:</h5></li>
+    <?php
+
+      $pdo = Database::connect();
+      $sql = 'SELECT * FROM Comentarios';
+      foreach ($pdo->query($sql) as $row) {
+    ?>
+    <li class="collection-item grey">
+      <?php
+        echo '<span style="font-weight: bold">'.$row['nombre'].'</b> comentó:</span>'.'<br>';
+        echo '<span class="mensaje flow-text" style="font-size: 12pt">'.$row['mensaje'].'</span><br>';
+        echo '<span class="black-text comment-date" style="position: relative; margin-left: 70%; font-size: 10pt">'.$row['fecha'].'</span><br>';
+      ?>
+    </li>
+    <?php
+        }
+        Database::disconnect();
+      ?>
+  </ul>
+		</div>
+<!--Twitter-->
+	<div class="col s4">
 		<br>
 		<h5><b>Actividad reciente en Twitter:</b></h5>
 		<a class="twitter-timeline" href="https://twitter.com/BancoProfilia">Tweets by BancoProfilia</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

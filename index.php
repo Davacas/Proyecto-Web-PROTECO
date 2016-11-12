@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if ( isset($_SESSION['user'])) {
+	if ( isset($_SESSION['nickname'])) {
 		header('location: ./index_chidos.php');
 		exit();
 	}
@@ -16,7 +16,7 @@
 		<title>BANCO PROFILIA</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
-		<style>
+		<style type="text/css">
 		html, body {
 		height: 100%;
 		margin: 0;
@@ -24,6 +24,17 @@
 		}
 		div#content {
 		width: 100%; height: 100%;
+		}
+		}
+		</style>
+		<style type="text/css">
+		li.active a{
+			background-color: #aaa;
+			font-weight: bold;
+			color: black;
+		}
+		li:hover a{
+			color: #999;
 		}
 		</style>
 	</head>
@@ -81,15 +92,21 @@
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="text-align: center">
 						<span class="card-title" >¿Ya eres miembro?</span>
-						<form action="login.php" method="POST" style="text-align: center">
-							<input type="text" name="user" placeholder="Nickname">
-							<input type="password" name="password" placeholder="Contraseña">
-							<input type="submit" class="waves-effect waves-light btn"  value="Iniciar sesión">
+						<form action="login.php" method="POST">
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="nickname" type="text" class="validate" name="nickname">
+                  <label for="nickname">Nickname</label>
+                </div>
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="password" type="password" class="validate" name="password">
+                  <label for="password">Contraseña</label>
+                </div>
+							<button class="btn waves-effect waves-light" type="submit" name="action">Iniciar sesión</button>
 						</form>
 						<br>
 						<form>
 							<span class="card-title" >¿Aún no lo eres?</span><br>
-							<a class="waves-effect waves-light btn">¡Hazte miembro!</a><br><br>
+							<a class="waves-effect waves-light btn" href="register.php">¡Hazte miembro!</a><br><br>
 						</form>
 					</div>
 				</div>

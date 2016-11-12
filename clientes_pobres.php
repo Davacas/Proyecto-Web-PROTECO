@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['nickname'])) {
 header('location: clientes.php');
 exit();
 }
@@ -60,21 +60,27 @@ exit();
 				</div>
 			</nav>
 		</div>
-		<!--Suscribete-->
+<!--Suscribete-->
 <div class="row">
 			<div class="col s12 offset-l4 m4" off>
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="text-align: center">
 						<span class="card-title" >¿Ya eres miembro?</span>
-						<form action="login.php" method="POST" style="text-align: center">
-							<input type="text" name="user" placeholder="Nickname">
-							<input type="password" name="password" placeholder="Contraseña">
-							<input type="submit" class="waves-effect waves-light btn"  value="Iniciar sesión">
+						<form action="login.php" method="POST">
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="nickname" type="text" class="validate" name="nickname">
+                  <label for="nickname">Nickname</label>
+                </div>
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="password" type="password" class="validate" name="password">
+                  <label for="password">Contraseña</label>
+                </div>
+							<button class="btn waves-effect waves-light" type="submit" name="action">Iniciar sesión</button>
 						</form>
 						<br>
 						<form>
 							<span class="card-title" >¿Aún no lo eres?</span><br>
-							<a class="waves-effect waves-light btn">¡Hazte miembro!</a><br><br>
+							<a class="waves-effect waves-light btn" href="register.php">¡Hazte miembro!</a><br><br>
 						</form>
 					</div>
 				</div>
@@ -84,17 +90,20 @@ exit();
 	<!--Servicio1-->
 <div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
 	<div class="offset-l1 col s3">
-	<br>
-		<ul class="collection with-header black darken-l">
-        <li class="collection-header black"><h5><b>Miembros Activos:</b></h5></li>
-        <li class="collection-item black">Elver</li>
-        <li class="collection-item black">Monnie</li>
-        <li class="collection-item black">Galarga</li>
-        <li class="collection-item black">Davacas</li>
-        <li class="collection-item black">Satanás</li>
-      </ul>
-      <h6>Saldo total del banco:</h6>
-      <p style="color: red">$-112358.13 MXN</p>
+	<div class="row" style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; font-size: 14pt; color: #EFEFEF">
+  <br>
+    <ul class="collection with-header black z-depth-1">
+              <li class="collection-header black lighten-3"> <h5><b>Miembros activos:</b></h5></li>
+              <?php
+                include 'db.php';
+                $pdo = Database::connect();
+                $sql = 'SELECT nickname FROM Usuarios';
+                foreach ($pdo->query($sql) as $row) {
+                  echo '<li class="collection-item grey">'.$row['nickname'].'</li>';
+                }
+              ?>
+           </ul>
+  </div>
 	</div>
 	<div class="col s7">
 		<h3><b>¡Muchas gracias!</b></h3>

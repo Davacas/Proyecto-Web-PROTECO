@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-header('location: historia_pobres.html');
+if (!isset($_SESSION['nickname'])) {
+header('location: historia_pobres.php');
 exit();
 }
 ?>

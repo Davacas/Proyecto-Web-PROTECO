@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if ( isset($_SESSION['user'])) {
+	if ( isset($_SESSION['nickname'])) {
 		header('location: historia.php');
 		exit();
 	}
@@ -61,20 +61,26 @@
 			</nav>
 		</div>
 <!--Suscribete-->
-		<div class="row">
+<div class="row">
 			<div class="col s12 offset-l4 m4" off>
 				<div class="card black darken-l">
 					<div class="card-content white-text" style="text-align: center">
 						<span class="card-title" >¿Ya eres miembro?</span>
-						<form action="login.php" method="POST" style="text-align: center">
-							<input type="text" name="user" placeholder="Nickname">
-							<input type="password" name="password" placeholder="Contraseña">
-							<input type="submit" class="waves-effect waves-light btn"  value="Iniciar sesión">
+						<form action="login.php" method="POST">
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="nickname" type="text" class="validate" name="nickname">
+                  <label for="nickname">Nickname</label>
+                </div>
+							<div class="input-field col l10 offset-l1" style="text-align: left">
+                  <input id="password" type="password" class="validate" name="password">
+                  <label for="password">Contraseña</label>
+                </div>
+							<button class="btn waves-effect waves-light" type="submit" name="action">Iniciar sesión</button>
 						</form>
 						<br>
 						<form>
 							<span class="card-title" >¿Aún no lo eres?</span><br>
-							<a class="waves-effect waves-light btn">¡Hazte miembro!</a><br><br>
+							<a class="waves-effect waves-light btn" href="register.php">¡Hazte miembro!</a><br><br>
 						</form>
 					</div>
 				</div>

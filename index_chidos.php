@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['nickname'])) {
 header('location: ./index.php');
 exit();
 }
@@ -16,7 +16,7 @@ exit();
 		<title>BANCO PROFILIA</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
-		<style>
+		<style type="text/css">
 		html, body {
 		height: 100%;
 		margin: 0;
@@ -24,6 +24,17 @@ exit();
 		}
 		div#content {
 		width: 100%; height: 100%;
+		}
+		}		
+		</style>
+		<style type="text/css">
+		li.active a{
+			background-color: #aaa;
+			font-weight: bold;
+			color: black;
+		}
+		li:hover a{
+			color: #999;
 		}
 		</style>
 	</head>

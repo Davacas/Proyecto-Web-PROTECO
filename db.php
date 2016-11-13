@@ -1,10 +1,10 @@
 <?php
 //limitar acceso de este archivo!!!
 class Database {
-    private static $dbName = 'La Banca' ;
-    private static $dbHost = 'localhost' ;
-    private static $dbUsername = 'root';
-    private static $dbUserPassword = '';
+    private static $dbName = 'u820728624_banco' ;
+    private static $dbHost = 'mysql.hostinger.mx' ;
+    private static $dbUsername = 'u820728624_davac';
+    private static $dbUserPassword = 'password';
      
     private static $cont  = null;
      

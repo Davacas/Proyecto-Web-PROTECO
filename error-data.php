@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>La Banca - Confirmación de eliminación de cuenta</title>
+  <link rel="icon" type="image/gif" href="img/logo.gif"/>
+    <title>BANCO PROFILIA</title>
   <link rel="stylesheet" href="css/materialize.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>

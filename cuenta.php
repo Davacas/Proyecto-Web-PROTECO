@@ -119,6 +119,12 @@ exit();
                         ?>
                         </td>
                         <td>
+                         <div class="row">
+                            <a href="deposit-form.php?no_cuenta=<?php echo $row['id_cuenta']?>" class="waves-effect waves-light btn btn-table light-green modal-trigger col s9">Depositar</a>
+                          </div>
+                          <div class="row">
+                            <a href="withdraw-form.php?no_cuenta=<?php echo $row['id_cuenta']?>" class="waves-effect waves-light btn btn-table orange lighten-1 modal-trigger col s9">Retirar</a>
+                          </div>
                           <div class="row">
                             <a href="transfer-form.php?no_cuenta=<?php echo $row['id_cuenta']?>" class="waves-effect waves-light btn btn-table blue lighten-2 modal-trigger col s9">Transferir</a>
                           </div>

@@ -17,7 +17,7 @@
         	session_start();
 			$_SESSION['nickname'] = $data['nickname'];
 			$_SESSION['nombre'] = $data['nombre'];
-			$_SESSION['email'] = $data['email'];
+			$_SESSION['apellido_p'] = $data['apellido_p'];
 			$saldo_total = 0;
 			$pdo = Database::connect();
 			header('location: ./autenticacion.php');
